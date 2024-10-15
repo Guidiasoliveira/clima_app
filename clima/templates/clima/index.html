@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima em {{ cidade }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Clima em {{ cidade }}</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="cidade">Digite o nome da cidade:</label>
+                <input type="text" class="form-control" name="cidade" id="cidade" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Obter Clima</button>
+        </form>
+
+        {% if erro %}
+            <div class="alert alert-danger mt-3">{{ erro }}</div>
+        {% else %}
+            <div class="alert alert-success mt-3">
+                <p>Temperatura atual: {{ temperatura }}°C</p>
+                <p>Condição do tempo: {{ condicao }}</p>
+                <p>Chance de chuva: {{ chance_chuva }} mm</p>
+                <p>Umidade: {{ umidade }}%</p>
+                <p>Velocidade do vento: {{ vento }} km/h</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
